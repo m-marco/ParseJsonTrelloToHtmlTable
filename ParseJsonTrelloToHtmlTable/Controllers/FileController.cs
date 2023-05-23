@@ -91,7 +91,7 @@ namespace ParseJsonTrelloToHtmlTable.Controllers
                     html += $@"<tr>
                         <td align='center'>{(index2 + 1)}</td>
                         <td align='center'>{index++}</td>
-                        <td>{(card.Arquivado ? "[Arquivado] " : "")}{card.Titulo}<br>{checkListHtml}</td>
+                        <td>{(card.Arquivado ? "[Arquivado] " : "")}{card.Titulo}{(!string.IsNullOrEmpty(card.Descricao) ? "<br><code>" + card.Descricao + "</code>" : "")}<br>{checkListHtml}</td>
                         <td align='center'>{labelsHtml}</td>
                      </tr>";
                 }
@@ -161,8 +161,20 @@ namespace ParseJsonTrelloToHtmlTable.Controllers
 
         public class CardDTO
         {
+            private string _desc { get; set; }
+
             [JsonPropertyName("name")]
             public string Titulo { get; set; }
+
+            [JsonPropertyName("desc")]
+            public string Descricao
+            {
+                get
+                {
+                    return _desc.Replace("\n", "<br>");
+                }
+                set => _desc = value;
+            }
 
             [JsonPropertyName("closed")]
             public bool Arquivado { get; set; }
