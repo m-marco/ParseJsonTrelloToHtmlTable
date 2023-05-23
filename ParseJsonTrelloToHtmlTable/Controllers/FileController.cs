@@ -84,7 +84,21 @@ namespace ParseJsonTrelloToHtmlTable.Controllers
                             {
                                 labelsHtml += "<br>";
                             }
-                            labelsHtml += $"<span class='badge' style='background: {label.Cor}; color: {(label.Cor == "yellow" ? "black" : "white")};'>{label.Nome}</span>";
+
+                            string corTexto = "";
+
+                            switch (label.Cor)
+                            {
+                                case "yellow":
+                                case "":
+                                    corTexto = "black";
+                                    break;
+                                default:
+                                    corTexto = "white";
+                                    break;
+                            }
+
+                            labelsHtml += $"<span class='badge' style='background: {label.Cor}; color: {corTexto};'>{label.Nome}</span>";
                         }
                     }
 
