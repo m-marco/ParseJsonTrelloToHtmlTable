@@ -80,7 +80,11 @@ namespace ParseJsonTrelloToHtmlTable.Controllers
                     {
                         foreach (var label in labels)
                         {
-                            labelsHtml += $"<span class='badge' style='background: {label.Cor}; color: {(label.Cor == "yellow" ? "black" : "white")}; display:inherit;'>{label.Nome}</span>";
+                            if (!string.IsNullOrEmpty(labelsHtml))
+                            {
+                                labelsHtml += "<br>";
+                            }
+                            labelsHtml += $"<span class='badge' style='background: {label.Cor}; color: {(label.Cor == "yellow" ? "black" : "white")};>{label.Nome}</span>";
                         }
                     }
 
