@@ -84,15 +84,15 @@ namespace ParseJsonTrelloToHtmlTable.Controllers
                             {
                                 labelsHtml += "<br>";
                             }
-                            labelsHtml += $"<span class='badge' style='background: {label.Cor}; color: {(label.Cor == "yellow" ? "black" : "white")};>{label.Nome}</span>";
+                            labelsHtml += $"<span class='badge' style='background: {label.Cor}; color: {(label.Cor == "yellow" ? "black" : "white")};'>{label.Nome}</span>";
                         }
                     }
 
                     html += $@"<tr>
                         <td align='center'>{(index2 + 1)}</td>
                         <td align='center'>{index++}</td>
-                        <td>{card.Titulo}<br>{checkListHtml}</td>
-                        <td>{labelsHtml}</td>
+                        <td>{(card.Arquivado ? "[Arquivado] " : "")}{card.Titulo}<br>{checkListHtml}</td>
+                        <td align='center'>{labelsHtml}</td>
                      </tr>";
                 }
             }
@@ -163,6 +163,9 @@ namespace ParseJsonTrelloToHtmlTable.Controllers
         {
             [JsonPropertyName("name")]
             public string Titulo { get; set; }
+
+            [JsonPropertyName("closed")]
+            public bool Arquivado { get; set; }
 
             [JsonPropertyName("idList")]
             public string ListId { get; set; }
