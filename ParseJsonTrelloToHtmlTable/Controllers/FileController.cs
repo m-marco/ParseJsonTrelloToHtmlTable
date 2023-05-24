@@ -58,7 +58,6 @@ namespace ParseJsonTrelloToHtmlTable.Controllers
                     if (checklists.Any())
                     {
                         checkListHtml = "<ol>";
-
                         foreach (var checklist in checklists)
                         {
                             checkListHtml += $"<li>{checklist.Nome}<ol>";
@@ -68,8 +67,8 @@ namespace ParseJsonTrelloToHtmlTable.Controllers
                             }
                             checkListHtml += "</ol></li>";
 
-                            checkListHtml += "<ol>";
                         }
+                        checkListHtml += "</ol>";
                     }
 
                     var labels = model.Labels.Where(x => card.LabelIds.Contains(x.Id)).ToList();
